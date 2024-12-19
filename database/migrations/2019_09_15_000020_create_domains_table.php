@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\Tenant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,16 +17,15 @@ class CreateDomainsTable extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
-            $table->string('domain', 255)->unique();
-            $table->foreignId('tenant_id')->constrained()
+            $table->string('domain')->unique();
+            $table->string('tenant_id')->unique();
+            $table->foreign('tenant_id')
+                ->references('id')
+                ->on('tenants')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
             $table->timestamps();
-
-            $table->index([
-                'tenant_id',
-            ]);
         });
     }
 
