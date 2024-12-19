@@ -16,16 +16,20 @@ class DatabaseSeeder extends Seeder
     {
         $tenants = Tenant::factory()->createMany([
             ['name' => 'foo'],
-            ['name' => 'bar' ]
+            ['name' => 'bar']
         ]);
 
-        $tenants->each(fn ($tenant) =>
+        $tenants->each(function ($tenant) {
+            $tenant->domains()->create([
+                'domain' => "$tenant->name.localhost"
+            ]);
+
             $tenant->run(function () {
                 User::factory()->create([
-                    'name' => 'Test User',
-                    'email' => 'test@example.com',
+                    'name' => 'Yoda',
+                    'email' => 'yoda@gmail.com',
                 ]);
-            }
-        ));
+            });
+        });
     }
 }
