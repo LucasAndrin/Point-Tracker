@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Tenant;
 
 use App\Traits\Relations\BelongsToUser;
 use Illuminate\Database\Eloquent\Model;

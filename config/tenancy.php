@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Tenant;
-use Stancl\Tenancy\Database\Models\Domain;
+use App\Models\Domain;
 
 return [
     'id_generator' => null,
